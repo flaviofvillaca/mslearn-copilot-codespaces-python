@@ -18,8 +18,10 @@ app.mount("/ui", StaticFiles(directory=static_path), name="ui")
 class Body(BaseModel):
     length: Union[int, None] = 20
 
+
 class Text(BaseModel):
     text: str
+
 
 @app.get('/')
 def root():
@@ -30,7 +32,8 @@ def root():
 @app.post('/generate')
 def generate(body: Body):
     """
-    Generate a pseudo-random token ID of twenty characters by default. Example POST request body:
+    Generate a pseudo-random token ID of twenty characters by default.
+    Example POST request body:
 
     {
         "length": 20
@@ -39,10 +42,12 @@ def generate(body: Body):
     string = base64.b64encode(os.urandom(64))[:body.length].decode('utf-8')
     return {'token': string}
 
+
 @app.post('/docs')
-def generate(Text: Text):
+def docs(Text: Text):
     """
-    Generate a pseudo-random token ID of twenty characters by default. Example POST request body:
+    Generate a pseudo-random token ID of twenty characters by default.
+    Example POST request body:
 
     {
         "text": "test text"
